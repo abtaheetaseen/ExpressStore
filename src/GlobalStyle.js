@@ -49,28 +49,29 @@ h4 {
 
 h1 {
   color: ${({ theme }) => theme.colors.heading};
-  font-size: 6rem;
+  font-size: 4rem;
   font-weight: 900;
 }
 
  h2 {
    color: ${({ theme }) => theme.colors.heading};
-   font-size: 4.4rem;
+   font-size: 2.5rem;
    font-weight: 300;
    white-space: normal;
   
   }
 
 h3 {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 400;
 }
 
 p, button {
   color: ${({ theme }) => theme.colors.text};
-  font-size: 1.65rem;
+  font-size: 1.5rem;
   line-height: 1.5;
   font-weight:400;
+  margin-bottom: 10px;
 }
 
 a {
@@ -116,12 +117,15 @@ ${"" /* resuable code section  */}
       font-weight: 600;
       margin-bottom: 6rem;
       text-transform: capitalize;
+      color: whitesmoke;
     }
 
      .intro-data {
       margin-bottom: 0;
       text-transform: uppercase;
-      color: #5138ee;
+      color: rgb(0 182 79);
+      font-size: 13px;
+      font-weight: 600;
     }
 
    .caption {
@@ -139,9 +143,8 @@ ${"" /* resuable code section  */}
 input, textarea{
     max-width: 50rem;
     color: ${({ theme }) => theme.colors.black};
-    padding: 1.6rem 2.4rem;
+    padding: 1rem 4rem;
     border: 1px solid ${({ theme }) => theme.colors.border};
-    text-transform: uppercase;
    box-shadow: ${({ theme }) => theme.colors.shadowSupport};
 }
     input[type="submit"]{
@@ -149,11 +152,11 @@ input, textarea{
     margin-top: 2rem;
     background-color: ${({ theme }) => theme.colors.btn};
     color: ${({ theme }) => theme.colors.white};
-    padding: 1.4rem 2.2rem;
+    padding: 5px 5px;
     border-style: solid;
     border-width: .1rem;
     text-transform: uppercase;
-    font-size: 1.8rem;
+    font-size: 15px;
     cursor: pointer;
     }
 
@@ -178,3 +181,4 @@ input, textarea{
     }
 
 `;
+export default GlobalStyle;

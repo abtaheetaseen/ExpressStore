@@ -1,8 +1,106 @@
 import styled from "styled-components";
+import { useCartContext } from "./context/cart_context";
+import CartProductItem from "./components/CartProductItem";
+import { NavLink } from "react-router-dom";
+import { Button } from "./styles/Button";
+import FormatPrice from "./helpers/FormatPrice";
 
 const Cart = () => {
-  return <Wrapper></Wrapper>;
+
+  const {cart, clearCart, total_price, shipping_fee} = useCartContext();
+
+  if(cart.length === 0){
+    return (
+      <EmptyDiv>
+        <div className="emptyDiv">
+        <h3>No items in cart.....</h3>
+        <div className="no-item-button">
+        <NavLink to='/products'>
+          <Button>Back for Shopping</Button>
+        </NavLink>
+        </div>
+        </div>
+      </EmptyDiv>
+    )
+  }
+
+  return <Wrapper>
+    <div className="container">
+      <div className="cart_heading grid grid-five-column">
+        <p>Item</p>
+        <p className="cart-hide">Price</p>
+        <p>Quantity</p>
+        <p className="cart-hide">Subtotal</p>
+        <p>Remove</p>
+      </div>
+      <hr />
+
+      <div className="cart-item">
+        {
+          cart.map((curElem) => {
+            return <CartProductItem key={curElem.id} {...curElem}/>
+          })
+        }
+      </div>
+      <hr />
+
+      <div className="cart-two-button">
+        <NavLink to='/products'>
+          <Button>Continue Shopping</Button>
+        </NavLink>
+        <Button className='btn btn-clear' onClick={clearCart}>Clear Cart</Button>
+      </div>
+
+      {/* subtotal part */}
+      <div className="order-total--amount">
+        <div className="order-total--subdata">
+          <div>
+            <p>Sub-Total: </p>
+            <p><FormatPrice price={total_price} /></p>
+          </div>
+
+          <div>
+            <p>Shipping-Fee: </p>
+                <p><FormatPrice price={shipping_fee} /></p>
+          </div>
+          <hr />
+
+          <div>
+            <p>Order-Total: </p>
+            <p><FormatPrice price={total_price + shipping_fee}/></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Wrapper>
 };
+
+const EmptyDiv = styled.div`
+  .emptyDiv{
+    display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 50vh;
+  }
+
+  h3 {
+    font-size: 4.2rem;
+    font-weight: 300;
+  }
+
+  @media (max-width: ${({ theme }) => theme.media.mobile}) {
+    .emptyDiv{
+      display: grid;
+      place-items: center;
+    }
+
+     h3{
+      font-size: 3rem;
+     }
+
+
+  }
+`;
 
 const Wrapper = styled.section`
   padding: 9rem 0;
@@ -58,8 +156,8 @@ const Wrapper = styled.section`
     text-transform: capitalize;
     text-align: left;
     img {
-      max-width: 5rem;
-      height: 5rem;
+      max-width: 8rem;
+      height: 6rem;
       object-fit: contain;
       color: transparent;
     }
@@ -74,7 +172,7 @@ const Wrapper = styled.section`
         width: 1.4rem;
         height: 1.4rem;
 
-        border-radius: 50%;
+        
       }
     }
   }
@@ -110,7 +208,7 @@ const Wrapper = styled.section`
 
   .remove_icon {
     font-size: 1.6rem;
-    color: #e74c3c;
+    color: red;
     cursor: pointer;
   }
 
